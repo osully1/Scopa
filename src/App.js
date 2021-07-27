@@ -13,12 +13,18 @@ function App() {
     setDeckSata(data)
   }
 
+  // Creates new scopa deck when app launches. Sets data to deckData state
+  useEffect(() => {
+    newGame();
+  }, [])
+
   return (
     <div className="App">
       <header className="App-header">
       </header>
         <GameTable
-        
+          deckData={deckData}
+          setDeckData={setDeckData}
         />
     </div>
   );
