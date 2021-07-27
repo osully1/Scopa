@@ -13,3 +13,21 @@ export function drawCardsP2(deckid) {
         return fetch('http://deckofcardsapi.com/api/deck/' + deckid + '/draw/?count=3').then(res => res.json());
     } catch(error) {console.log(error)}
 }
+
+export function drawCommonCards(deckid) {
+    try{
+        return fetch('http://deckofcardsapi.com/api/deck/' + deckid + '/draw/?count=4').then(res => res.json());
+    } catch(error) {console.log(error)}
+}
+
+export function addToPile1(deckid, cards) {
+    try{
+        return fetch(`https://deckofcardsapi.com/api/deck/${deckid}/pile/pile1/add/?cards=${cards}`).then(res => res.json());
+    } catch(error) {console.log(error)}
+}
+
+export function addToPile2(deckid, cards) {
+    try{
+        return fetch(`https://deckofcardsapi.com/api/deck/${deckid}/pile/pile2/add/?cards=${cards}`).then(res => res.json());
+    } catch(error) {console.log(error)}
+}
