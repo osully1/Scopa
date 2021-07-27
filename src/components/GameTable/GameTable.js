@@ -38,8 +38,15 @@ const GameTable = (props) => {
                 setP1Hand={setP1Hand}
                 setP2Hand={setP2Hand}
             />
-            {/* <PlayArea />
-            <P2Side /> */}
+            <PlayArea />
+            <P2Side
+                deckData={props.deckData}
+                setDeckData={props.setDeckData}
+                p1Hand={p1Hand}
+                p2Hand={p2Hand}
+                setP1Hand={setP1Hand}
+                setP2Hand={setP2Hand}
+            />
             <button
                 className={styles.startbtn}
                 onClick={() => newGameDeal()}

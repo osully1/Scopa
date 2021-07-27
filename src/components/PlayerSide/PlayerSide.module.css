@@ -1,0 +1,9 @@
+.P1Side {
+    display: flex;
+    justify-content: center;
+}
+
+.P2Side {
+    display: flex;
+    justify-content: center;
+}

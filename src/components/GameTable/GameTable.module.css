@@ -1,0 +1,10 @@
+.GameTable {
+    height: 100vh;
+    width: 100vw;
+}
+
+.startbtn {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+}

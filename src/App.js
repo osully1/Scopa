@@ -12,7 +12,6 @@ function App() {
   async function newGame() {
     const data = await newGameDeck()
     setDeckData(data)
-    console.log(data)
   }
 
   // Creates new scopa deck when app launches. Sets data to deckData state
