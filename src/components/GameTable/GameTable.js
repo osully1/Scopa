@@ -32,37 +32,97 @@ const GameTable = (props) => {
     }
 
     // Value Equals Start
+    // Value Equals Start
+    // Value Equals Start
     // The following section changes all card value strings into integers
-    
+
     const tallyEquals1 = () => {
-
         const p1Array = [...p1Hand]
-
         if (p1Hand.length) {
             return(
                 p1Array.map((card, idx) => {
                     if (card.value === 'KING') {
-                        card.value = card.value.replace('KING', '10')
+                        card.value = parseInt(card.value.replace('KING', '10'))
                     } else if (card.value === 'JACK') {
-                        card.value = card.value.replace('JACK', '9')
+                        card.value = parseInt(card.value.replace('JACK', '9'))
                     } else if (card.value === 'QUEEN') {
-                        card.value = card.value.replace('QUEEN', '8')
+                        card.value = parseInt(card.value.replace('QUEEN', '8'))
                     } else if (card.value === 'ACE') {
-                        card.value = card.value.replace('ACE', '1')
+                        card.value = parseInt(card.value.replace('ACE', '1'))
+                    } else {
+                        card.value = parseInt(card.value)
                     }
+                    return(p1Array)
                 })
             )
-            setP1Hand(p1Array)
         } else {
             return [0]
         }
     }
 
+    const tallyEquals2 = () => {
+        const p2Array = [...p2Hand]
+        if (p2Hand.length) {
+            return(
+                p2Array.map((card, idx) => {
+                    if (card.value === 'KING') {
+                        card.value = parseInt(card.value.replace('KING', '10'))
+                    } else if (card.value === 'JACK') {
+                        card.value = parseInt(card.value.replace('JACK', '9'))
+                    } else if (card.value === 'QUEEN') {
+                        card.value = parseInt(card.value.replace('QUEEN', '8'))
+                    } else if (card.value === 'ACE') {
+                        card.value = parseInt(card.value.replace('ACE', '1'))
+                    } else {
+                        card.value = parseInt(card.value)
+                    }
+                    return(p2Array)
+                })
+            )
+        } else {
+            return [0]
+        }
+    }
+
+    const tallyEqualsc = () => {
+        const cArray = [...commonCards]
+        if (commonCards.length) {
+            return(
+                cArray.map((card, idx) => {
+                    if (card.value === 'KING') {
+                        card.value = parseInt(card.value.replace('KING', '10'))
+                    } else if (card.value === 'JACK') {
+                        card.value = parseInt(card.value.replace('JACK', '9'))
+                    } else if (card.value === 'QUEEN') {
+                        card.value = parseInt(card.value.replace('QUEEN', '8'))
+                    } else if (card.value === 'ACE') {
+                        card.value = parseInt(card.value.replace('ACE', '1'))
+                    } else {
+                        card.value = parseInt(card.value)
+                    }
+                    return(cArray)
+                })
+            )
+        } else {
+            return [0]
+        }
+    }
+    
+
     useEffect(() => {
         tallyEquals1()
-        console.log(p1Hand)
     }, [p1Hand])
 
+    useEffect(() => {
+        tallyEquals2()
+    }, [p2Hand])
+
+    useEffect(() => {
+        tallyEqualsc()
+    }, [commonCards])
+
+    // Value Equals End
+    // Value Equals End
     // Value Equals End
 
     return (
