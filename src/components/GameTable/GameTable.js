@@ -13,17 +13,33 @@ const GameTable = (props) => {
     const [ p2Hand, setP2Hand ] = useState([]);
     const [commonCards, setCommonCards] = useState([]);
 
+    // function that creates arrays for p1 hand, p2 hand, and common cards.
+    // Also sets remaining cards of game deck state to -10
     async function newGameDeal() {
         const p1Data = await drawCardsP1(props.deckData.deck_id)
         const p2Data = await drawCardsP2(props.deckData.deck_id)
         const commonData = await drawCommonCards(props.deckData.deck_id)
+        setP1Hand(p1Data.cards)
+        setP2Hand(p2Data.cards)
+        setCommonCards(commonData.cards)
+        props.setDeckData((prevState) => ({
+            ...prevState,
+            remaining: 30
+        }))
     }
 
     return (
         <div className={styles.GameTable}>
-            <P1Side />
-            <PlayArea />
-            <P2Side />
+            <P1Side
+                deckData={props.deckData}
+                setDeckData={props.setDeckData}
+                p1Hand={p1Hand}
+                p2Hand={p2Hand}
+                setP1Hand={setP1Hand}
+                setP2Hand={setP2Hand}
+            />
+            {/* <PlayArea />
+            <P2Side /> */}
             <button
                 className={styles.startbtn}
                 onClick={() => newGameDeal()}

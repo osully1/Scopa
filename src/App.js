@@ -8,9 +8,11 @@ function App() {
   const [ deckData, setDeckData ] = useState({})
   const [ scores, setScores ] = useState([])
 
+  // Sets state with deck_id
   async function newGame() {
     const data = await newGameDeck()
-    setDeckSata(data)
+    setDeckData(data)
+    console.log(data)
   }
 
   // Creates new scopa deck when app launches. Sets data to deckData state
@@ -21,11 +23,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      </header>
-        <GameTable
+      <GameTable
           deckData={deckData}
           setDeckData={setDeckData}
         />
+      </header>
     </div>
   );
 }
