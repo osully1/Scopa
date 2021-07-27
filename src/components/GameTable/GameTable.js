@@ -12,6 +12,9 @@ const GameTable = (props) => {
     const [ p1Hand, setP1Hand ] = useState([]);
     const [ p2Hand, setP2Hand ] = useState([]);
     const [commonCards, setCommonCards] = useState([]);
+    const [ p1Tally, setP1Tally ] = useState({pCardValue: {}, cCardValue: []})
+    const [ p2Tally, setP2Tally ] = useState({pCardValue: {}, cCardValue: []})
+    const [ turn, setTurn ] = useState(true)
 
     // function that creates arrays for p1 hand, p2 hand, and common cards.
     // Also sets remaining cards of game deck state to -10
@@ -28,6 +31,40 @@ const GameTable = (props) => {
         }))
     }
 
+    // Value Equals Start
+    // The following section changes all card value strings into integers
+    
+    const tallyEquals1 = () => {
+
+        const p1Array = [...p1Hand]
+
+        if (p1Hand.length) {
+            return(
+                p1Array.map((card, idx) => {
+                    if (card.value === 'KING') {
+                        card.value = card.value.replace('KING', '10')
+                    } else if (card.value === 'JACK') {
+                        card.value = card.value.replace('JACK', '9')
+                    } else if (card.value === 'QUEEN') {
+                        card.value = card.value.replace('QUEEN', '8')
+                    } else if (card.value === 'ACE') {
+                        card.value = card.value.replace('ACE', '1')
+                    }
+                })
+            )
+            setP1Hand(p1Array)
+        } else {
+            return [0]
+        }
+    }
+
+    useEffect(() => {
+        tallyEquals1()
+        console.log(p1Hand)
+    }, [p1Hand])
+
+    // Value Equals End
+
     return (
         <div className={styles.GameTable}>
             <P1Side
@@ -37,12 +74,22 @@ const GameTable = (props) => {
                 p2Hand={p2Hand}
                 setP1Hand={setP1Hand}
                 setP2Hand={setP2Hand}
+                p1Tally={p1Tally}
+                setP1Tally={setP1Tally}
+                turn={turn}
+                setTurn={setTurn}
             />
             {/* div container used to alter behavior of middle cards/play area */}
             <div className={styles.commonCardContainer}>
                 <PlayArea
                     commonCards={commonCards}
                     setCommonCards={setCommonCards}
+                    p1Tally={p1Tally}
+                    p2Tally={p2Tally}
+                    setP1Tally={setP1Tally}
+                    setP2Tally={setP2Tally}
+                    turn={turn}
+                    setTurn={setTurn}
                 />
             </div>
             <P2Side
@@ -52,6 +99,10 @@ const GameTable = (props) => {
                 p2Hand={p2Hand}
                 setP1Hand={setP1Hand}
                 setP2Hand={setP2Hand}
+                p2Tally={p2Tally}
+                setP2Tally={setP2Tally}
+                turn={turn}
+                setTurn={setTurn}
             />
             <button
                 className={styles.startbtn}

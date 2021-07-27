@@ -1,6 +1,11 @@
 import styles from './PlayerHand.module.css'
 
 const P1Hand = (props) => {
+
+    function toggleCard(e) {
+        props.setP1Tally({pCardValue: e, cCardValue: []})
+    }
+
     return props.p1Hand.map((card, idx) => {
         return(
             <div className={styles.hand1Container}>
@@ -13,6 +18,11 @@ const P1Hand = (props) => {
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no - repeat',
                         backgroundSize: 'cover'
+                    }}
+                    onClick={() => {
+                        if (props.turn === true) {
+
+                        }
                     }}
                     key={idx}
                 />

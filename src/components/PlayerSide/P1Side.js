@@ -8,9 +8,11 @@ const P1Side = (props) => {
                 deckData={props.deckData}
                 setDeckData={props.setDeckData}
                 p1Hand={props.p1Hand}
-                p2Hand={props.p2Hand}
                 setP1Hand={props.setP1Hand}
-                setP2Hand={props.setP2Hand}
+                p1Tally={props.p1Tally}
+                setP1Tally={props.setP1Tally}
+                turn={props.turn}
+                setTurn={props.setTurn}
             />
         </div>
     )

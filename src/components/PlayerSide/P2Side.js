@@ -7,10 +7,12 @@ const P2Side = (props) => {
             <P2Hand
                 deckData={props.deckData}
                 setDeckData={props.setDeckData}
-                p1Hand={props.p1Hand}
                 p2Hand={props.p2Hand}
-                setP1Hand={props.setP1Hand}
                 setP2Hand={props.setP2Hand}
+                p2Tally={props.p2Tally}
+                setP2Tally={props.setP2Tally}
+                turn={props.turn}
+                setTurn={props.setTurn}
             />
         </div>
     )
