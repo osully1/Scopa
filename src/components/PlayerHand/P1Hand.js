@@ -6,9 +6,9 @@ const P1Hand = (props) => {
             <div className={styles.hand1Container}>
                 <button 
                     style={{
-                        height: '7rem',
-                        width: '5rem',
-                        margin: '1rem',
+                        height: '7em',
+                        width: '5em',
+                        margin: '1em',
                         backgroundImage: "url(" + `${card.image}` + ")",
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no - repeat',

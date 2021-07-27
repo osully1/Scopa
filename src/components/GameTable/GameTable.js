@@ -38,7 +38,13 @@ const GameTable = (props) => {
                 setP1Hand={setP1Hand}
                 setP2Hand={setP2Hand}
             />
-            <PlayArea />
+            {/* div container used to alter behavior of middle cards/play area */}
+            <div className={styles.commonCardContainer}>
+                <PlayArea
+                    commonCards={commonCards}
+                    setCommonCards={setCommonCards}
+                />
+            </div>
             <P2Side
                 deckData={props.deckData}
                 setDeckData={props.setDeckData}
