@@ -1,4 +1,5 @@
-import { slideInDown } from 'react-animations'
+import { slideInDown, bounce } from 'react-animations'
+import { useState, useEffect } from 'react';
 import { css, StyleSheet } from "aphrodite"
 
 const P1Hand = (props) => {
@@ -7,8 +8,11 @@ const P1Hand = (props) => {
         P1Hand: {
             animationName: slideInDown,
             animationDuration: '1s',
-            margin: '1rem'
-        }
+            margin: '1rem',
+            ':hover': {
+                transform: 'translateY(-10px)'
+            }
+        },
     })
 
     function toggleCard(e) {
@@ -26,7 +30,7 @@ const P1Hand = (props) => {
                         backgroundImage: "url(" + `${card.image}` + ")",
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no - repeat',
-                        backgroundSize: 'cover'
+                        backgroundSize: 'cover',
                     }}
                     onClick={() => {
                         if (props.turn === true) {
