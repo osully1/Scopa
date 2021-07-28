@@ -1,6 +1,15 @@
-import styles from './PlayerHand.module.css'
+import { slideInUp } from 'react-animations'
+import { css, StyleSheet } from "aphrodite"
 
 const P2Hand = (props) => {
+
+    const styles = StyleSheet.create({
+        P2Hand: {
+            animationName: slideInUp,
+            animationDuration: '1s',
+            margin: '1rem'
+        }
+    })
 
     function toggleCard(e) {
         props.setP2Tally({pCardValue: e, cCardValue: []})
@@ -8,7 +17,7 @@ const P2Hand = (props) => {
 
     return props.p2Hand.map((card, idx) => {
         return(
-            <div className={styles.hand2Container} key={idx}>
+            <div className={css(styles.P2Hand)} key={idx}>
                 <button 
                     style={{
                         height: '7em',

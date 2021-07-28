@@ -1,6 +1,15 @@
-import styles from './PlayerHand.module.css'
+import { slideInDown } from 'react-animations'
+import { css, StyleSheet } from "aphrodite"
 
 const P1Hand = (props) => {
+
+    const styles = StyleSheet.create({
+        P1Hand: {
+            animationName: slideInDown,
+            animationDuration: '1s',
+            margin: '1rem'
+        }
+    })
 
     function toggleCard(e) {
         props.setP1Tally({pCardValue: e, cCardValue: []})
@@ -8,7 +17,7 @@ const P1Hand = (props) => {
 
     return props.p1Hand.map((card, idx) => {
         return(
-            <div className={styles.hand1Container} key={idx}>
+            <div className={css(styles.P1Hand)} key={idx}>
                 <button 
                     style={{
                         height: '7em',

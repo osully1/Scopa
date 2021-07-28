@@ -5,18 +5,25 @@ import { slideInRight } from 'react-animations'
 import { css, StyleSheet } from "aphrodite"
 
 const PlayArea = (props) => {
+
+    const styles = StyleSheet.create({
+        CommonCards: {
+            animationName: slideInRight,
+            animationDuration: '1s',
+            height: '7em',
+            width: '5em',
+            margin: '1rem',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no - repeat',
+            backgroundSize: 'cover'
+        }
+    })
+
     return props.commonCards.map((card, idx) => {
         return(
             <button 
-                style={{
-                    height: '7em',
-                    width: '5em',
-                    margin: '1em',
-                    backgroundImage: "url(" + `${card.image}` + ")",
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no - repeat',
-                    backgroundSize: 'cover'
-                }}
+                className={css(styles.CommonCards)}
+                style={{backgroundImage: "url(" + `${card.image}` + ")"}}
                 key={idx}
             />
         )
