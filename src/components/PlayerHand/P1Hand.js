@@ -9,11 +9,18 @@ const P1Hand = (props) => {
             animationName: slideInDown,
             animationDuration: '1s',
             margin: '1rem',
-            ':hover': {
+        },
+        P1HandActive: {
+            animationName: slideInDown,
+            animationDuration: '1s',
+            margin: '1rem',
+            ':active': {
                 transform: 'translateY(-10px)'
             }
-        },
+        }
     })
+
+    const [ turnState, setTurnState ] = useState(styles.P1HandActive)
 
     function toggleCard(e) {
         props.setP1Tally({pCardValue: e, cCardValue: []})
@@ -21,7 +28,7 @@ const P1Hand = (props) => {
 
     return props.p1Hand.map((card, idx) => {
         return(
-            <div className={css(styles.P1Hand)} key={idx}>
+            <div className={css(turnState)} key={idx}>
                 <button 
                     style={{
                         height: '7em',
