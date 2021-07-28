@@ -31,9 +31,9 @@ const GameTable = (props) => {
         }))
     }
 
-    // Value Equals Start
-    // Value Equals Start
-    // Value Equals Start
+    // Value Equals Start ////////////////
+    // Value Equals Start ////////////////
+    // Value Equals Start ////////////////
     // The following section changes all card value strings into integers
 
     const tallyEquals1 = () => {
@@ -121,9 +121,9 @@ const GameTable = (props) => {
         tallyEqualsc()
     }, [commonCards])
 
-    // Value Equals End
-    // Value Equals End
-    // Value Equals End
+    // Value Equals End ////////////////
+    // Value Equals End ////////////////
+    // Value Equals End ////////////////
 
     return (
         <div className={styles.GameTable}>

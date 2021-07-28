@@ -8,7 +8,7 @@ const P1Hand = (props) => {
 
     return props.p1Hand.map((card, idx) => {
         return(
-            <div className={styles.hand1Container}>
+            <div className={styles.hand1Container} key={idx}>
                 <button 
                     style={{
                         height: '7em',
@@ -21,10 +21,9 @@ const P1Hand = (props) => {
                     }}
                     onClick={() => {
                         if (props.turn === true) {
-
+                            toggleCard(card)
                         }
                     }}
-                    key={idx}
                 />
             </div>
         )

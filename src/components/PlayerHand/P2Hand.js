@@ -1,9 +1,14 @@
 import styles from './PlayerHand.module.css'
 
 const P2Hand = (props) => {
+
+    function toggleCard(e) {
+        props.setP2Tally({pCardValue: e, cCardValue: []})
+    }
+
     return props.p2Hand.map((card, idx) => {
         return(
-            <div className={styles.hand2Container}>
+            <div className={styles.hand2Container} key={idx}>
                 <button 
                     style={{
                         height: '7em',
@@ -14,7 +19,11 @@ const P2Hand = (props) => {
                         backgroundRepeat: 'no - repeat',
                         backgroundSize: 'cover'
                     }}
-                    key={idx}
+                    onClick={() => {
+                        if (props.turn === false) {
+                            toggleCard(card)
+                        }
+                    }}
                 />
             </div>
         )
