@@ -15,7 +15,7 @@ const P1Hand = (props) => {
             animationName: slideInDown,
             animationDuration: '1s',
             margin: '1rem',
-            transform: 'translateY(-10px)'
+            transform: 'translateY(-15px)'
         }
     })
 

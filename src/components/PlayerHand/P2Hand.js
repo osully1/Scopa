@@ -7,7 +7,13 @@ const P2Hand = (props) => {
         P2Hand: {
             animationName: slideInUp,
             animationDuration: '1s',
-            margin: '1rem'
+            margin: '1rem',
+        },
+        P2HandActive: {
+            animationName: slideInUp,
+            animationDuration: '1s',
+            margin: '1rem',
+            transform: 'translateY(-10px)'
         }
     })
 
@@ -17,7 +23,7 @@ const P2Hand = (props) => {
 
     return props.p2Hand.map((card, idx) => {
         return(
-            <div className={css(styles.P2Hand)} key={idx}>
+            <div className={css([styles.P2Hand, props.p2Tally.pCardValue.code === card.code && styles.P2HandActive])} key={props.idx}>
                 <button 
                     style={{
                         height: '7em',
