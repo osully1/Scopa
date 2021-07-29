@@ -5,6 +5,7 @@ import P1Card from './P1Card'
 
 const P1Hand = (props) => {
 
+    // In-line style section for animations and "active" style for select translate up
     const styles = StyleSheet.create({
         P1Hand: {
             animationName: slideInDown,
@@ -35,6 +36,8 @@ const P1Hand = (props) => {
             //     turn={props.turn}
             //     setTurn={props.setTurn}
             // />
+
+            // className below will switch styles without need of state
             <div className={css([styles.P1Hand, props.p1Tally.pCardValue.code === card.code && styles.P1HandActive])} key={props.idx}>
                 <button 
                     style={{

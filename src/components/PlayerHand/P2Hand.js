@@ -3,6 +3,7 @@ import { css, StyleSheet } from "aphrodite"
 
 const P2Hand = (props) => {
 
+    // In-line style section for animations and "active" style for select translate up
     const styles = StyleSheet.create({
         P2Hand: {
             animationName: slideInUp,
@@ -13,7 +14,7 @@ const P2Hand = (props) => {
             animationName: slideInUp,
             animationDuration: '1s',
             margin: '1rem',
-            transform: 'translateY(-10px)'
+            transform: 'translateY(-15px)'
         }
     })
 
@@ -23,6 +24,7 @@ const P2Hand = (props) => {
 
     return props.p2Hand.map((card, idx) => {
         return(
+            // className below will switch styles without need of state
             <div className={css([styles.P2Hand, props.p2Tally.pCardValue.code === card.code && styles.P2HandActive])} key={props.idx}>
                 <button 
                     style={{

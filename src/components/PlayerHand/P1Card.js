@@ -4,6 +4,7 @@ import { css, StyleSheet } from "aphrodite"
 
 const P1Card = (props) => {
 
+    // In-line style section for animations and "active" style for select translate up
     const styles = StyleSheet.create({
         P1Hand: {
             animationName: slideInDown,
