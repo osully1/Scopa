@@ -18,8 +18,13 @@ const P2Hand = (props) => {
         }
     })
 
+    // onClick for card buttons. Selects card, stores it in pTally, and allows you to deselect card
     function toggleCard(e) {
+        if (props.p2Tally.pCardValue === e) {
+            props.setP2Tally({pCardValue: {}, cCardValue: []})
+        } else {
         props.setP2Tally({pCardValue: e, cCardValue: []})
+        }
     }
 
     return props.p2Hand.map((card, idx) => {
