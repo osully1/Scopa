@@ -1,7 +1,4 @@
-import { drawCommonCards } from '../../services/card-api';
-import styles from './PlayArea.module.css'
-import React from 'react'
-import { slideInRight } from 'react-animations'
+import { slideInRight, bounce } from 'react-animations'
 import { css, StyleSheet } from "aphrodite"
 
 const PlayArea = (props) => {
@@ -10,12 +7,11 @@ const PlayArea = (props) => {
         CommonCards: {
             animationName: slideInRight,
             animationDuration: '1s',
-            height: '7em',
-            width: '5em',
-            margin: '1rem',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no - repeat',
-            backgroundSize: 'cover'
+        },
+        CommonCardsActive: {
+            animationName: slideInRight,
+            animationDuration: '1s',
+            transform: 'translateY(-15px)'
         }
     })
 
@@ -37,30 +33,39 @@ const PlayArea = (props) => {
 
     return props.commonCards.map((card, idx) => {
         return(
-            <button 
-                className={css(styles.CommonCards)}
-                style={{backgroundImage: "url(" + `${card.image}` + ")"}}
-                onClick={() => {
-                    if (
-                        props.p1Tally.pCardValue
-                        && props.turn === true
-                        && props.p1Tally.cCardValue.length < 4
-                        && props.p1Tally.cCardValue.every(function (i) {
-                            return i.code !== card.code
-                        })) {
-                        toggleCardP1(card)
-                    } else if (
-                        props.p2Tally.pCardValue
-                        && props.turn === false
-                        && props.p2Tally.cCardValue.length < 4
-                        && props.p2Tally.cCardValue.every(function (i) {
-                            return i.code !== card.code
-                        })) {
-                        toggleCardP2(card)
-                    }
-                }}
-                key={idx}
-            />
+            <div className={css([styles.CommonCards, props.p1Tally.cCardValue.includes(card) /*|| props.p2Tally.cCardValue.includes(card)*/ && styles.CommonCardsActive])}>
+                <button 
+                    style={{
+                        height: '7em',
+                        width: '5em',
+                        margin: '1rem',
+                        backgroundImage: "url(" + `${card.image}` + ")",
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no - repeat',
+                        backgroundSize: 'cover'
+                    }}
+                    onClick={() => {
+                        if (
+                            Object.keys(props.p1Tally.pCardValue).length
+                            && props.turn === true
+                            && props.p1Tally.cCardValue.length < 4
+                            && props.p1Tally.cCardValue.every(function (i) {
+                                return i.code !== card.code
+                            })) {
+                            toggleCardP1(card)
+                        } else if (
+                            Object.keys(props.p2Tally.pCardValue).length
+                            && props.turn === false
+                            && props.p2Tally.cCardValue.length < 4
+                            && props.p2Tally.cCardValue.every(function (i) {
+                                return i.code !== card.code
+                            })) {
+                            toggleCardP2(card)
+                        }
+                    }}
+                    key={idx}
+                />
+            </div>
         )
     })
 }

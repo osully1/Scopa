@@ -1,7 +1,5 @@
 import { slideInDown, bounce } from 'react-animations'
-import { useState, useEffect } from 'react';
 import { css, StyleSheet } from "aphrodite"
-import P1Card from './P1Card'
 
 const P1Hand = (props) => {
 
@@ -31,6 +29,8 @@ const P1Hand = (props) => {
 
     return props.p1Hand.map((card, idx) => {
         return(
+
+            // Obselete card component below. Could be useful later.
             // <P1Card
             //     card={card}
             //     idx={idx}
@@ -43,7 +43,7 @@ const P1Hand = (props) => {
             // />
 
             // className below will switch styles without need of state
-            <div className={css([styles.P1Hand, props.p1Tally.pCardValue.code === card.code && styles.P1HandActive])} key={props.idx}>
+            <div className={css([styles.P1Hand, props.p1Tally.pCardValue.code === card.code && styles.P1HandActive])} key={idx}>
                 <button 
                     style={{
                         height: '7em',

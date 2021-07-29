@@ -30,7 +30,7 @@ const P2Hand = (props) => {
     return props.p2Hand.map((card, idx) => {
         return(
             // className below will switch styles without need of state
-            <div className={css([styles.P2Hand, props.p2Tally.pCardValue.code === card.code && styles.P2HandActive])} key={props.idx}>
+            <div className={css([styles.P2Hand, props.p2Tally.pCardValue.code === card.code && styles.P2HandActive])} key={idx}>
                 <button 
                     style={{
                         height: '7em',
