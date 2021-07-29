@@ -1,0 +1,9 @@
+.p1btns {
+    display: flex;
+    flex-direction: column;
+    width: 5em;
+    position: absolute;
+    top: 2em;
+    right: 1em;
+    margin: 5px
+}
