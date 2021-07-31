@@ -17,10 +17,30 @@ const P1PlayButtons = (props) => {
     })
 
     const playButtonFunction = () => {
+
+        // Switches which player remaining cards go to if this is the last play of the round
         props.setCardsGoToP1(true)
 
-        let newHand = [...props.p1Hand]
+        // Creates an array of the p1's new hand after discarding p1Tally.pCardValue card. Will check if this array is empty to determine if the round is over
+        let newHand = []
+        props.p1Hand.forEach((card) => {
+            if (card.code !== props.p1Tally.pCardValue.code) {
+                newHand.push(card)
+            }
+        })
 
+        // Creates "commonCardArray" which is the new common cards after p1 takes some
+        const commonCardArray = []
+        const commonTallyArray = props.p1Tally.cCardValue.map((card) => {
+            return card.code
+        })
+        props.commonCards.map((card) => {
+            if(commonTallyArray.indexOf(card.code) === -1) {
+                commonCardArray.push(card)
+            }
+        })
+
+        // Moves all p1Tally cards into p1's score pile
         props.setP1Pile((prevState) => ([
             ...prevState,
             ...props.p1Tally.cCardValue,

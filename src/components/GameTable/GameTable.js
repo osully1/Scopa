@@ -137,6 +137,8 @@ const GameTable = (props) => {
                 p2Hand={p2Hand}
                 setP1Hand={setP1Hand}
                 setP2Hand={setP2Hand}
+                commonCards={commonCards}
+                setCommonCards={setCommonCards}
                 p1Tally={p1Tally}
                 setP1Tally={setP1Tally}
                 turn={turn}
@@ -168,6 +170,8 @@ const GameTable = (props) => {
                 p2Hand={p2Hand}
                 setP1Hand={setP1Hand}
                 setP2Hand={setP2Hand}
+                commonCards={commonCards}
+                setCommonCards={setCommonCards}
                 p2Tally={p2Tally}
                 setP2Tally={setP2Tally}
                 turn={turn}
