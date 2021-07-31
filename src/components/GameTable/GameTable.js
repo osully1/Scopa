@@ -14,7 +14,10 @@ const GameTable = (props) => {
     const [commonCards, setCommonCards] = useState([]);
     const [ p1Tally, setP1Tally ] = useState({pCardValue: {}, cCardValue: []})
     const [ p2Tally, setP2Tally ] = useState({pCardValue: {}, cCardValue: []})
+    const [ p1Pile, setP1Pile ] = useState([])
+    const [ p2Pile, setP2Pile ] = useState([])
     const [ turn, setTurn ] = useState(true)
+    const [ cardsToP1, setCardsToP1 ] = useState(true)
 
     // function that creates arrays for p1 hand, p2 hand, and common cards.
     // Also sets remaining cards of game deck state to -10
@@ -138,6 +141,12 @@ const GameTable = (props) => {
                 setP1Tally={setP1Tally}
                 turn={turn}
                 setTurn={setTurn}
+                cardsToP1={cardsToP1}
+                setCardsToP1={setCardsToP1}
+                p1Pile={p1Pile}
+                p2Pile={p2Pile}
+                setP1Pile={setP1Pile}
+                setP2Pile={setP2Pile}
             />
             {/* div container used to alter behavior of middle cards/play area */}
             <div className={styles.commonCardContainer}>
@@ -163,6 +172,12 @@ const GameTable = (props) => {
                 setP2Tally={setP2Tally}
                 turn={turn}
                 setTurn={setTurn}
+                cardsToP1={cardsToP1}
+                setCardsToP1={setCardsToP1}
+                p1Pile={p1Pile}
+                p2Pile={p2Pile}
+                setP1Pile={setP1Pile}
+                setP2Pile={setP2Pile}
             />
             <button
                 className={styles.startbtn}

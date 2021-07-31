@@ -24,6 +24,12 @@ const P1Side = (props) => {
                 setP1Tally={props.setP1Tally}
                 turn={props.turn}
                 setTurn={props.setTurn}
+                cardsToP1={props.cardsToP1}
+                setCardsToP1={props.setCardsToP1}
+                p1Pile={props.p1Pile}
+                p2Pile={props.p2Pile}
+                setP1Pile={props.setP1Pile}
+                setP2Pile={props.setP2Pile}
             />
         </>
     )

@@ -16,6 +16,20 @@ const P1PlayButtons = (props) => {
         }
     })
 
+    const playButtonFunction = () => {
+        props.setCardsGoToP1(true)
+
+        let newHand = [...props.p1Hand]
+
+        props.setP1Pile((prevState) => ([
+            ...prevState,
+            ...props.p1Tally.cCardValue,
+            props.p1Tally.pCardValue
+        ]))
+
+        // Need to finish this function. Need to keep in mind that setting state is asynchronous and I must use variables for immediate actions and then set state later in the same button click
+    }
+
     return(
         <div className={styles.p1btns}>
             <button 
