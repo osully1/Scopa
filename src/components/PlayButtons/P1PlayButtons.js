@@ -43,7 +43,7 @@ const P1PlayButtons = (props) => {
     const playButtonFunction = () => {
 
         // Switches which player remaining cards go to if this is the last play of the round
-        props.setCardsGoToP1(true)
+        props.setCardsToP1(true)
 
         // Creates an array of the p1's new hand after discarding p1Tally.pCardValue card. Will check if this array is empty to determine if the round is over
         let newHand = []
@@ -52,6 +52,7 @@ const P1PlayButtons = (props) => {
                 newHand.push(card)
             }
         })
+        props.setP1Hand(newHand)
 
         // Creates "commonCardArray" which is the new common cards after p1 takes some
         const commonCardArray = []
@@ -63,6 +64,7 @@ const P1PlayButtons = (props) => {
                 commonCardArray.push(card)
             }
         })
+        props.setCommonCards(commonCardArray)
 
         // Moves all p1Tally cards into p1's score pile
         props.setP1Pile((prevState) => ([
@@ -79,6 +81,7 @@ const P1PlayButtons = (props) => {
             <button 
                 // className will change play button to active when value of player card matches the sum of values of selected common cards
                 className={css([stylesb.PlayInactive, props.gameOn === false && stylesb.PlayInvis, props.p1Tally.pCardValue.value === props.p1Tally.cCardValue.map(x => x.value).reduce((a, b) => a + b, 0) && stylesb.PlayActive])}
+                onClick={() => playButtonFunction()}
             >Play Card</button>
             <button
                 className={css([stylesb.DiscInactive, props.gameOn === false && stylesb.DiscInvis, Object.keys(props.p1Tally.pCardValue).length && props.p1Tally.cCardValue.length < 1 && stylesb.DiscActive])}
