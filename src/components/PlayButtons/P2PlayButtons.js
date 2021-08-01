@@ -1,6 +1,7 @@
 import styles from './PlayButtons.module.css'
 import { css, StyleSheet } from "aphrodite"
-import { slideInRight, bounce } from 'react-animations'
+import { slideInRight } from 'react-animations'
+import { newGameDeck } from '../../services/card-api'
 import { drawCardsP1 } from '../../services/card-api';
 import { drawCardsP2 } from '../../services/card-api';
 import { drawCommonCards } from '../../services/card-api';
@@ -43,6 +44,21 @@ const P2PlayButtons = (props) => {
         }
     })
 
+    async function newRoundDeal() {
+        const data = await newGameDeck()
+        const p1Data = await drawCardsP1(data.deck_id)
+        const p2Data = await drawCardsP2(data.deck_id)
+        const commonData = await drawCommonCards(data.deck_id)
+        props.setDeckData(data)
+        props.setP1Hand(p1Data.cards)
+        props.setP2Hand(p2Data.cards)
+        props.setCommonCards(commonData.cards)
+        props.setDeckData((prevState) => ({
+            ...prevState,
+            remaining: 30
+        }))
+    }
+
     async function newDeal1() {
         const p1Data = await drawCardsP1(props.deckData.deck_id)
         props.setP1Hand(p1Data.cards)
@@ -56,6 +72,97 @@ const P2PlayButtons = (props) => {
             ...prevState,
             remaining: props.deckData.remaining -= 6
         }))
+    }
+
+    // Runs when players have no more cards. Deals new cards
+    const newSubRound = () => {
+        setTimeout(() => {
+            newDeal1()   
+        }, 800)
+
+        setTimeout(() => {
+            newDeal2()   
+        }, 1600)
+    }
+
+    // Runs when players have no more cards and deck is dry. Deals new cards and sets scores
+    const newRound = () => {
+
+        let thisRoundScore1 = 0
+        let thisRoundScore2 = 0
+
+        // CARDS POINT SECTION
+        if (props.p1Pile.length > props.p2Pile.length) {
+            thisRoundScore1++
+        } else if (props.p2Pile.length > props.p1Pile.length) {
+            thisRoundScore2++
+        }
+        // CARDS POINT SECTION
+
+        // DIAMONDS POINT SECTION
+        let diamondCount1 = 0
+        let diamondCount2 = 0
+        for (i = 0; i < props.p1Pile.length; ++i) {
+            if (props.p1Pile[i].suit === "DIAMONDS") {
+            diamondCount1++
+            }
+        }
+        for (i = 0; i < props.p2Pile.length; ++i) {
+            if (props.p2Pile[i].suit === "DIAMONDS") {
+            diamondCount2++
+            }
+        }
+        if (diamondCount1 > diamondCount2) {
+            thisRoundScore1++
+        } else if (diamondCount2 > diamondCount1) {
+            thisRoundScore2++
+        }
+        // DIAMONDS POINT SECTION
+
+        // SEVENS POINT SECTION
+        let sevensCount1 = 0
+        let sevensCount2 = 0
+        for (i = 0; i < props.p1Pile.length; ++i) {
+            if (props.p1Pile[i].value === 7) {
+            sevensCount1++
+            }
+        }
+        for (var i = 0; i < props.p2Pile.length; ++i) {
+            if (props.p2Pile[i].value === 7) {
+            sevensCount2++
+            }
+        }
+        if (sevensCount1 > sevensCount2) {
+            thisRoundScore1++
+        } else if (sevensCount2 > sevensCount1) {
+            thisRoundScore2++
+        }
+        // SEVENS POINT SECTION
+
+        // SEVEN OF DIAMONDS POINT SECTION
+        props.p1Pile.map((card) => {
+            if (card.code === '7D') {
+                thisRoundScore1++
+            }
+        })
+        props.p2Pile.map((card) => {
+            if (card.code === '7D') {
+                thisRoundScore2++
+            }
+        })
+        // SEVEN OF DIAMONDS POINT SECTION
+
+        // TALLY EM UP SECTION
+        props.setP1Score(thisRoundScore1)
+        props.setP2Score(thisRoundScore2)
+        sevensCount1 = 0
+        sevensCount2 = 0
+        diamondCount1 = 0
+        diamondCount2 = 0
+        thisRoundScore1 = 0
+        thisRoundScore2 = 0
+        // TALLY EM UP SECTION
+        newRoundDeal()
     }
 
     const playButtonFunction = () => {
@@ -103,16 +210,17 @@ const P2PlayButtons = (props) => {
             && props.p1Hand.length === 0
             && props.deckData.remaining > 0
         ) {
-            setTimeout(() => {
-                newDeal1()   
-            }, 800)
-
-            setTimeout(() => {
-                newDeal2()   
-            }, 1600)
+            newSubRound()
         }
 
-        // Need to finish this function. Need to keep in mind that setting state is asynchronous and I must use variables for immediate actions and then set state later in the same button click
+        // Checks if whole round is over and runs newRound function to tally cards, shuffle, and deal new cards
+        if (
+            newHand.length === 0
+            && props.p2Hand.length === 0
+            && props.deckData.remaining === 0
+        ) {
+            newRound()
+        }
     }
 
     const discardButtonFunction = () => {
@@ -143,13 +251,16 @@ const P2PlayButtons = (props) => {
             && props.p1Hand.length === 0
             && props.deckData.remaining > 0
         ) {
-            setTimeout(() => {
-                newDeal1()   
-            }, 800)
+            newSubRound()
+        }
 
-            setTimeout(() => {
-                newDeal2()   
-            }, 1600)
+        // Checks if whole round is over and runs newRound function to tally cards, shuffle, and deal new cards
+        if (
+            newHand.length === 0
+            && props.p1Hand.length === 0
+            && props.deckData.remaining === 0
+        ) {
+            newRound()
         }
     }
 

@@ -12,9 +12,3 @@
     align-self: flex-end;
     margin: auto;
 }
-
-.p1Score {
-    position: absolute;
-    top: 2em;
-    left: 2em;
-}
