@@ -57,6 +57,8 @@ const P2PlayButtons = (props) => {
             ...prevState,
             remaining: 30
         }))
+        props.setP1Pile([])
+        props.setP2Pile([])
     }
 
     async function newDeal1() {
