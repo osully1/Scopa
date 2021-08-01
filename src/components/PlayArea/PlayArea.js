@@ -33,7 +33,7 @@ const PlayArea = (props) => {
 
     return props.commonCards.map((card, idx) => {
         return(
-            <div className={css([styles.CommonCards, props.p1Tally.cCardValue.includes(card) /*|| props.p2Tally.cCardValue.includes(card)*/ && styles.CommonCardsActive])}>
+            <div className={css([styles.CommonCards, props.p1Tally.cCardValue.includes(card) && styles.CommonCardsActive, props.p2Tally.cCardValue.includes(card) && styles.CommonCardsActive])}>
                 <button 
                     style={{
                         height: '7em',

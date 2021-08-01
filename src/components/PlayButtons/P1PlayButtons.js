@@ -63,6 +63,9 @@ const P1PlayButtons = (props) => {
         // Switches which player remaining cards go to if this is the last play of the round
         props.setCardsToP1(true)
 
+        // Switches turns
+        props.setTurn(false)
+
         // Creates an array of the p1's new hand after discarding p1Tally.pCardValue card. Will check if this array is empty to determine if the round is over
         let newHand = []
         props.p1Hand.forEach((card) => {
@@ -90,6 +93,9 @@ const P1PlayButtons = (props) => {
             ...props.p1Tally.cCardValue,
             props.p1Tally.pCardValue
         ]))
+
+        // Resets P1Tally so no cards are selected
+        props.setP1Tally({pCardValue: {}, cCardValue: []})
 
         // Checks if subround is over and new cards need to be dealt, then deals new cards if needbe.
         if (

@@ -6,3 +6,12 @@
     top: 2em;
     right: 1em;
 }
+
+.p2btns {
+    display: flex;
+    flex-direction: column;
+    width: 5em;
+    position: absolute;
+    bottom: 2em;
+    right: 1em;
+}
