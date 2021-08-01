@@ -1,6 +1,9 @@
 import styles from './PlayButtons.module.css'
 import { css, StyleSheet } from "aphrodite"
 import { slideInRight, bounce } from 'react-animations'
+import { drawCardsP1 } from '../../services/card-api';
+import { drawCardsP2 } from '../../services/card-api';
+import { drawCommonCards } from '../../services/card-api';
 
 const P1PlayButtons = (props) => {
 
@@ -40,6 +43,21 @@ const P1PlayButtons = (props) => {
         }
     })
 
+    async function newDeal1() {
+        const p1Data = await drawCardsP1(props.deckData.deck_id)
+        props.setP1Hand(p1Data)
+    }
+
+    // WARNING!!! MUST REMEMBER THAT SETTING REMAINING STATE IS ASYNCHRONOUS!!! THAT WILL BITE YOU IN THE BUTT WHEN YOU HAVE TO CHECK WHETHER OR NOT THE ROUND IS OVER TO SHUFFLE AND RE-DEAL ALL CARDS!!!!
+    async function newDeal2() {
+        const p2Data = await drawCardsP2(props.deckData.deck_id)
+        props.setP2Hand(p2Data)
+        props.setDeckData((prevState) => ({
+            ...prevState,
+            remaining: props.deckData.remaining -= 6
+        }))
+    }
+
     const playButtonFunction = () => {
 
         // Switches which player remaining cards go to if this is the last play of the round
@@ -72,6 +90,21 @@ const P1PlayButtons = (props) => {
             ...props.p1Tally.cCardValue,
             props.p1Tally.pCardValue
         ]))
+
+        // Checks if subround is over and new cards need to be dealt, then deals new cards if needbe.
+        if (
+            newHand.length === 0
+            && props.p2Hand.length === 0
+            && props.deckData.remaining > 0
+        ) {
+            setTimeout(() => {
+                newDeal1()   
+            }, 800)
+
+            setTimeout(() => {
+                newDeal2()   
+            }, 1600)
+        }
 
         // Need to finish this function. Need to keep in mind that setting state is asynchronous and I must use variables for immediate actions and then set state later in the same button click
     }

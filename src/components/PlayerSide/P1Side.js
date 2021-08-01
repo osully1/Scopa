@@ -18,8 +18,12 @@ const P1Side = (props) => {
                 />
             </div>
             <P1PlayButtons
+                deckData={props.deckData}
+                setDeckData={props.setDeckData}
                 p1Hand={props.p1Hand}
                 setP1Hand={props.setP1Hand}
+                p2Hand={props.p2Hand}
+                setP2Hand={props.setP2Hand}
                 commonCards={props.commonCards}
                 setCommonCards={props.setCommonCards}
                 p1Tally={props.p1Tally}
