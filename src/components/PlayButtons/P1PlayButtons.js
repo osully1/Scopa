@@ -58,6 +58,20 @@ const P1PlayButtons = (props) => {
         }))
     }
 
+    // Runs when players have no more cards. Deals new cards and sets scores
+    const newSubRound = () => {
+        setTimeout(() => {
+            newDeal1()   
+        }, 800)
+
+        setTimeout(() => {
+            newDeal2()   
+        }, 1600)
+
+        /// Will come back and determine how/where the scoring function should be written. If may be best to write this function once on GameBoard and export it somehow to P1PlayButtons and P2PlayButtons. It would save a lot of space and be less comfusing.
+
+    }
+
     const playButtonFunction = () => {
 
         // Switches which player remaining cards go to if this is the last play of the round
@@ -97,19 +111,13 @@ const P1PlayButtons = (props) => {
         // Resets P1Tally so no cards are selected
         props.setP1Tally({pCardValue: {}, cCardValue: []})
 
-        // Checks if subround is over and new cards need to be dealt, then deals new cards if needbe.
+        // Checks if subround is over and new cards need to be dealt and runs newSubRound function
         if (
             newHand.length === 0
             && props.p2Hand.length === 0
             && props.deckData.remaining > 0
         ) {
-            setTimeout(() => {
-                newDeal1()   
-            }, 800)
-
-            setTimeout(() => {
-                newDeal2()   
-            }, 1600)
+            newSubRound()
         }
 
         // Need to finish this function. Need to keep in mind that setting state is asynchronous and I must use variables for immediate actions and then set state later in the same button click

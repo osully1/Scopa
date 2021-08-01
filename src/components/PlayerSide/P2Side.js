@@ -1,10 +1,30 @@
 import P2Hand from '../PlayerHand/P2Hand'
 import P2PlayButtons from '../PlayButtons/P2PlayButtons'
 import styles from './PlayerSide.module.css'
+import { slideInLeft } from 'react-animations'
+import { css, StyleSheet } from "aphrodite"
 
 const P2Side = (props) => {
+
+    const stylesb = StyleSheet.create({
+        ScoreInactive: {
+            animationName: slideInLeft,
+            animationDuration: '1s',
+            display: 'none'
+        },
+        ScoreActive: {
+            animationName: slideInLeft,
+            animationDuration: '1s',
+            position: 'absolute',
+            bottom: '4em',
+            left: '2em',
+            display: 'auto'
+        }
+    })
+
     return(
         <>
+            <p className={css([stylesb.ScoreInactive, props.gameOn === true && stylesb.ScoreActive])}>Player 2: {props.p2Score}</p>
             <div className={styles.P2Side}>
                 <P2Hand
                     deckData={props.deckData}
@@ -38,6 +58,10 @@ const P2Side = (props) => {
                 setP2Pile={props.setP2Pile}
                 gameOn={props.gameOn}
                 setGameOn={props.setGameOn}
+                p1Score={props.p1Score}
+                setP1Score={props.setP1Score}
+                p2Score={props.p2Score}
+                setP2Score={props.setP2Score}
             />
         </>
     )
