@@ -32,6 +32,8 @@ const P1Side = (props) => {
                 p2Pile={props.p2Pile}
                 setP1Pile={props.setP1Pile}
                 setP2Pile={props.setP2Pile}
+                gameOn={props.gameOn}
+                setGameOn={props.setGameOn}
             />
         </>
     )

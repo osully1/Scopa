@@ -1,18 +1,42 @@
 import styles from './PlayButtons.module.css'
 import { css, StyleSheet } from "aphrodite"
+import { slideInRight, bounce } from 'react-animations'
 
 const P1PlayButtons = (props) => {
 
+    // Styles below control whether buttons are active or inactive depending on cards selected, or whether buttons display or not depending on whether a game is happening
     const stylesb = StyleSheet.create({
-        P1Play: {
+        PlayInactive: {
+            animationName: slideInRight,
+            animationDuration: '1s',
             marginBottom: '10px',
             pointerEvents: 'none',
             opacity: '0.65'
         },
-        P1PlayActive: {
+        PlayActive: {
+            animationName: slideInRight,
+            animationDuration: '1s',
             marginBottom: '10px',
             pointerEvents: 'auto',
             opacity: '1'
+        },
+        PlayInvis: {
+            display: 'none'
+        },
+        DiscInactive: {
+            animationName: slideInRight,
+            animationDuration: '1s',
+            pointerEvents: 'none',
+            opacity: '0.65'
+        },
+        DiscActive: {
+            animationName: slideInRight,
+            animationDuration: '1s',
+            pointerEvents: 'auto',
+            opacity: '1'
+        },
+        DiscInvis: {
+            display: 'none'
         }
     })
 
@@ -54,9 +78,11 @@ const P1PlayButtons = (props) => {
         <div className={styles.p1btns}>
             <button 
                 // className will change play button to active when value of player card matches the sum of values of selected common cards
-                className={css([stylesb.P1Play, props.p1Tally.pCardValue.value === props.p1Tally.cCardValue.map(x => x.value).reduce((a, b) => a + b, 0) && stylesb.P1PlayActive])}
+                className={css([stylesb.PlayInactive, props.gameOn === false && stylesb.PlayInvis, props.p1Tally.pCardValue.value === props.p1Tally.cCardValue.map(x => x.value).reduce((a, b) => a + b, 0) && stylesb.PlayActive])}
             >Play Card</button>
-            <button>Discard</button>
+            <button
+                className={css([stylesb.DiscInactive, props.gameOn === false && stylesb.DiscInvis, Object.keys(props.p1Tally.pCardValue).length && props.p1Tally.cCardValue.length < 1 && stylesb.DiscActive])}
+            >Discard</button>
         </div>
     )
 }
