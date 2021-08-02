@@ -44,6 +44,7 @@ const P2PlayButtons = (props) => {
         }
     })
 
+    // function that runs when players have no cards and deck is dry
     async function newRoundDeal() {
         const data = await newGameDeck()
         const p1Data = await drawCardsP1(data.deck_id)
@@ -71,12 +72,11 @@ const P2PlayButtons = (props) => {
         }, 4000)
     }
 
+    // These two functions deal 3 cards to each players and reduces deckData.remaining by 6
     async function newDeal1() {
         const p1Data = await drawCardsP1(props.deckData.deck_id)
         props.setP1Hand(p1Data.cards)
     }
-
-    // WARNING!!! MUST REMEMBER THAT SETTING REMAINING STATE IS ASYNCHRONOUS!!! THAT WILL BITE YOU IN THE BUTT WHEN YOU HAVE TO CHECK WHETHER OR NOT THE ROUND IS OVER TO SHUFFLE AND RE-DEAL ALL CARDS!!!!
     async function newDeal2() {
         const p2Data = await drawCardsP2(props.deckData.deck_id)
         props.setP2Hand(p2Data.cards)
