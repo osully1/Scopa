@@ -74,10 +74,12 @@ const P2PlayButtons = (props) => {
 
     // These two functions deal 3 cards to each players and reduces deckData.remaining by 6
     async function newDeal1() {
+        props.setP1Hand([])
         const p1Data = await drawCardsP1(props.deckData.deck_id)
         props.setP1Hand(p1Data.cards)
     }
     async function newDeal2() {
+        props.setP2Hand([])
         const p2Data = await drawCardsP2(props.deckData.deck_id)
         props.setP2Hand(p2Data.cards)
         props.setDeckData((prevState) => ({
@@ -103,8 +105,21 @@ const P2PlayButtons = (props) => {
         // Ensures that the player who went second last round now goes first
         props.setTurn(!props.turn)
 
-        let thisRoundScore1 = 0
-        let thisRoundScore2 = 0
+        // Sends remaining common cards to whoever took cards last
+        if (props.cardsToP1 === true) {
+            props.setP1Pile((prevState) => ([
+                ...prevState,
+                ...props.commonCards
+            ]))
+        } else if (props.cardsToP1 === true) {
+            props.setP2Pile((prevState) => ([
+                ...prevState,
+                ...props.commonCards
+            ]))
+        }
+
+        let thisRoundScore1 = props.p1Score
+        let thisRoundScore2 = props.p2Score
 
         // CARDS POINT SECTION
         if (props.p1Pile.length > props.p2Pile.length) {
@@ -170,18 +185,28 @@ const P2PlayButtons = (props) => {
         // TALLY EM UP SECTION
         props.setP1Score(thisRoundScore1)
         props.setP2Score(thisRoundScore2)
-        sevensCount1 = 0
-        sevensCount2 = 0
-        diamondCount1 = 0
-        diamondCount2 = 0
-        thisRoundScore1 = 0
-        thisRoundScore2 = 0
+        // sevensCount1 = 0
+        // sevensCount2 = 0
+        // diamondCount1 = 0
+        // diamondCount2 = 0
+        // thisRoundScore1 = 0
+        // thisRoundScore2 = 0
         // TALLY EM UP SECTION
         
         // Checks if game is over. If not, runs newRoundDeal(). If so, runs gameOver()
-        if (props.p1Score > 20 || props.p2Score > 20) {
-            // gameOver()
+        if (props.p1Score > 10 || props.p2Score > 10) {
+            gameOver()
         } else {
+            newRoundDeal()
+        }
+    }
+
+    const gameOver = () => {
+        if (props.p1Score > props.p2Score) {
+            props.setP1Wins(true)
+        } else if (props.p1Score < props.p2Score) {
+            props.setP2Score(true)
+        } else if (props.p1Score === props.p2Score) {
             newRoundDeal()
         }
     }
@@ -237,7 +262,7 @@ const P2PlayButtons = (props) => {
         // Checks if whole round is over and runs newRound function to tally cards, shuffle, and deal new cards
         if (
             newHand.length === 0
-            && props.p2Hand.length === 0
+            && props.p1Hand.length === 0
             && props.deckData.remaining === 0
         ) {
             newRound()

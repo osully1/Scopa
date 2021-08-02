@@ -1,5 +1,6 @@
 import './App.css';
 import { useEffect, useState } from 'react';
+import { Route, Switch, Link } from 'react-router-dom';
 import { newGameDeck } from './services/card-api';
 import GameTable from './components/GameTable/GameTable';
 
@@ -22,10 +23,14 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <GameTable
-          deckData={deckData}
-          setDeckData={setDeckData}
-        />
+        <Switch>
+          <Route exact path = '/' render={(props) =>
+            <GameTable
+              deckData={deckData}
+              setDeckData={setDeckData}
+            />
+          } />
+        </Switch>
       </header>
     </div>
   );

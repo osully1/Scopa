@@ -19,12 +19,23 @@ const P1Side = (props) => {
             top: '4em',
             left: '2em',
             display: 'auto'
+        },
+        ScoreWon: {
+            animationName: slideInLeft,
+            animationDuration: '1s',
+            position: 'absolute',
+            top: '4em',
+            left: '2em',
+            display: 'auto',
+            color: 'green'
+            
+            
         }
     })
 
     return(
         <>
-            <p className={css([stylesb.ScoreInactive, props.gameOn === true && stylesb.ScoreActive])}>Player 1: {props.p1Score}</p>
+            <p className={css([stylesb.ScoreInactive, props.gameOn === true && stylesb.ScoreActive, props.gameOn === true && props.p1Wins === true && stylesb.ScoreWon])}>Player 1: {props.p1Score}</p>
             <div className={styles.P1Side}>
                 <P1Hand
                     deckData={props.deckData}
@@ -64,6 +75,10 @@ const P1Side = (props) => {
                 setP2Score={props.setP2Score}
                 betweenRounds={props.betweenRounds}
                 setBetweenRounds={props.setBetweenRounds}
+                p1Wins={props.p1Wins}
+                setP1Wins={props.setP1Wins}
+                p2Wins={props.p2Wins}
+                setP2Wins={props.setP2Wins}
             />
         </>
     )

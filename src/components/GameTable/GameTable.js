@@ -5,6 +5,7 @@ import { drawCommonCards } from '../../services/card-api';
 import P1Side from '../PlayerSide/P1Side';
 import P2Side from '../PlayerSide/P2Side';
 import PlayArea from '../PlayArea/PlayArea';
+import ForNataliia from '../ForNataliia/ForNataliia'
 import styles from './GameTable.module.css';
 import { css, StyleSheet } from "aphrodite"
 import { fadeIn } from 'react-animations'
@@ -28,6 +29,17 @@ const GameTable = (props) => {
             top: '50%',
             display: 'auto',
             zIndex: '2'
+        },
+        PWinsInvis: {
+            display: 'none'
+        },
+        PWinsVis: {
+            display: 'auto',
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            zIndex: '2',
+            size: '10em'
         }
     })
 
@@ -44,12 +56,19 @@ const GameTable = (props) => {
     const [ p1Score, setP1Score ] = useState(0)
     const [ p2Score, setP2Score ] = useState(0)
     const [ betweenRounds, setBetweenRounds ] = useState(false)
+    const [ p1Wins, setP1Wins ] = useState(false)
+    const [ p2Wins, setP2Wins ] = useState(false)
 
     // function that creates arrays for p1 hand, p2 hand, and common cards.
     // Also sets remaining cards of game deck state to -10
     async function newGameDeal() {
+        setP1Wins(false)
+        setP2Wins(false)
         setP1Score(0)
         setP1Score(0)
+        setP1Hand([])
+        setP2Hand([])
+        setCommonCards([])
         const p1Data = await drawCardsP1(props.deckData.deck_id)
         const p2Data = await drawCardsP2(props.deckData.deck_id)
         const commonData = await drawCommonCards(props.deckData.deck_id)
@@ -159,6 +178,9 @@ const GameTable = (props) => {
 
     return (
         <div className={styles.GameTable}>
+            <ForNataliia 
+                gameOn={gameOn}
+            />
             <P1Side
                 deckData={props.deckData}
                 setDeckData={props.setDeckData}
@@ -186,6 +208,10 @@ const GameTable = (props) => {
                 setP2Score={setP2Score}
                 betweenRounds={betweenRounds}
                 setBetweenRounds={setBetweenRounds}
+                p1Wins={p1Wins}
+                setP1Wins={setP1Wins}
+                p2Wins={p2Wins}
+                setP2Wins={setP2Wins}
             />
             {/* div container used to alter behavior of middle cards/play area */}
             <div className={styles.commonCardContainer}>
@@ -227,6 +253,10 @@ const GameTable = (props) => {
                 setP2Score={setP2Score}
                 betweenRounds={betweenRounds}
                 setBetweenRounds={setBetweenRounds}
+                p1Wins={p1Wins}
+                setP1Wins={setP1Wins}
+                p2Wins={p2Wins}
+                setP2Wins={setP2Wins}
             />
             <button
                 className={styles.startbtn}
@@ -234,6 +264,8 @@ const GameTable = (props) => {
             >Start Game
             </button>
             <p className={css([stylesb.NewDealInvis, betweenRounds === true && stylesb.NewDealVis])}>New Deal</p>
+            <p className={css([stylesb.PWinsInvis, p1Wins === true && stylesb.PWinsVis])}>PLAYER 1 WINS!!</p>
+            <p className={css([stylesb.PWinsInvis, p2Wins === true && stylesb.PWinsVis])}>PLAYER 2 WINS!!</p>
         </div>
     )
 }
