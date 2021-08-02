@@ -48,6 +48,8 @@ const GameTable = (props) => {
     // function that creates arrays for p1 hand, p2 hand, and common cards.
     // Also sets remaining cards of game deck state to -10
     async function newGameDeal() {
+        setP1Score(0)
+        setP1Score(0)
         const p1Data = await drawCardsP1(props.deckData.deck_id)
         const p2Data = await drawCardsP2(props.deckData.deck_id)
         const commonData = await drawCommonCards(props.deckData.deck_id)

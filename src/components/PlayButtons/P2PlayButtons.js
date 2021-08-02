@@ -177,7 +177,13 @@ const P2PlayButtons = (props) => {
         thisRoundScore1 = 0
         thisRoundScore2 = 0
         // TALLY EM UP SECTION
-        newRoundDeal()
+        
+        // Checks if game is over. If not, runs newRoundDeal(). If so, runs gameOver()
+        if (props.p1Score > 20 || props.p2Score > 20) {
+            // gameOver()
+        } else {
+            newRoundDeal()
+        }
     }
 
     const playButtonFunction = () => {
@@ -236,23 +242,6 @@ const P2PlayButtons = (props) => {
         ) {
             newRound()
         }
-
-        // Checks if the game is over. Runs gameOver()
-        if (
-            (
-                props.p1Score > 20
-                && newHand.length === 0
-                && props.p2Hand.length === 0
-                && props.deckData.remaining === 0
-            ) || (
-                props.p2Score > 20
-                && newHand.length === 0
-                && props.p2Hand.length === 0
-                && props.deckData.remaining === 0
-            )
-        ) {
-            // gameOver()
-        }
     }
 
     const discardButtonFunction = () => {
@@ -293,23 +282,6 @@ const P2PlayButtons = (props) => {
             && props.deckData.remaining === 0
         ) {
             newRound()
-        }
-
-        // Checks if the game is over. Runs gameOver()
-        if (
-            (
-                props.p1Score > 20
-                && newHand.length === 0
-                && props.p2Hand.length === 0
-                && props.deckData.remaining === 0
-            ) || (
-                props.p2Score > 20
-                && newHand.length === 0
-                && props.p2Hand.length === 0
-                && props.deckData.remaining === 0
-            )
-        ) {
-            // gameOver()
         }
     }
 
