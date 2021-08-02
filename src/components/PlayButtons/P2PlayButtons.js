@@ -100,6 +100,9 @@ const P2PlayButtons = (props) => {
     // Runs when players have no more cards and deck is dry. Deals new cards and sets scores
     const newRound = () => {
 
+        // Ensures that the player who went second last round now goes first
+        props.setTurn(!props.turn)
+
         let thisRoundScore1 = 0
         let thisRoundScore2 = 0
 
@@ -233,6 +236,23 @@ const P2PlayButtons = (props) => {
         ) {
             newRound()
         }
+
+        // Checks if the game is over
+        if (
+            (
+                props.p1Score > 20
+                && newHand.length === 0
+                && props.p2Hand.length === 0
+                && props.deckData.remaining === 0
+            ) || (
+                props.p2Score > 20
+                && newHand.length === 0
+                && props.p2Hand.length === 0
+                && props.deckData.remaining === 0
+            )
+        ) {
+            // gameOver()
+        }
     }
 
     const discardButtonFunction = () => {
@@ -273,6 +293,23 @@ const P2PlayButtons = (props) => {
             && props.deckData.remaining === 0
         ) {
             newRound()
+        }
+
+        // Checks if the game is over
+        if (
+            (
+                props.p1Score > 20
+                && newHand.length === 0
+                && props.p2Hand.length === 0
+                && props.deckData.remaining === 0
+            ) || (
+                props.p2Score > 20
+                && newHand.length === 0
+                && props.p2Hand.length === 0
+                && props.deckData.remaining === 0
+            )
+        ) {
+            // gameOver()
         }
     }
 

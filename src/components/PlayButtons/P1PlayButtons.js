@@ -100,6 +100,9 @@ const P1PlayButtons = (props) => {
     // Runs when players have no more cards and deck is dry. Deals new cards and sets scores
     const newRound = () => {
 
+        // Ensures that the player who went second last round now goes first
+        props.setTurn(!props.turn)
+
         let thisRoundScore1 = 0
         let thisRoundScore2 = 0
 
