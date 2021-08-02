@@ -50,15 +50,25 @@ const P1PlayButtons = (props) => {
         const p2Data = await drawCardsP2(data.deck_id)
         const commonData = await drawCommonCards(data.deck_id)
         props.setDeckData(data)
-        props.setP1Hand(p1Data.cards)
-        props.setP2Hand(p2Data.cards)
-        props.setCommonCards(commonData.cards)
-        props.setDeckData((prevState) => ({
-            ...prevState,
-            remaining: 30
-        }))
-        props.setP1Pile([])
-        props.setP2Pile([])
+        props.setBetweenRounds(true)
+        setTimeout(() => {
+            props.setP1Hand(p1Data.cards)
+        }, 1000)
+        setTimeout(() => {
+            props.setP2Hand(p2Data.cards)
+        }, 2000)
+        setTimeout(() => {
+            props.setCommonCards(commonData.cards)
+            props.setDeckData((prevState) => ({
+                ...prevState,
+                remaining: 30
+            }))
+            props.setP1Pile([])
+            props.setP2Pile([])
+        }, 3000)
+        setTimeout(() => {
+            props.setBetweenRounds(false)
+        }, 4000)
     }
 
     async function newDeal1() {

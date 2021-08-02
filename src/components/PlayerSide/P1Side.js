@@ -62,6 +62,8 @@ const P1Side = (props) => {
                 setP1Score={props.setP1Score}
                 p2Score={props.p2Score}
                 setP2Score={props.setP2Score}
+                betweenRounds={props.betweenRounds}
+                setBetweenRounds={props.setBetweenRounds}
             />
         </>
     )

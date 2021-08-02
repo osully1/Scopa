@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { drawCardsP1 } from '../../services/card-api';
 import { drawCardsP2 } from '../../services/card-api';
 import { drawCommonCards } from '../../services/card-api';
@@ -6,8 +6,30 @@ import P1Side from '../PlayerSide/P1Side';
 import P2Side from '../PlayerSide/P2Side';
 import PlayArea from '../PlayArea/PlayArea';
 import styles from './GameTable.module.css';
+import { css, StyleSheet } from "aphrodite"
+import { fadeIn } from 'react-animations'
 
 const GameTable = (props) => {
+
+    const stylesb = StyleSheet.create({
+        NewDealInvis: {
+            animationName: fadeIn,
+            animationDuration: '1s',
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            display: 'none'
+        },
+        NewDealVis: {
+            animationName: fadeIn,
+            animationDuration: '1s',
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            display: 'auto',
+            zIndex: '2'
+        }
+    })
 
     const [ p1Hand, setP1Hand ] = useState([]);
     const [ p2Hand, setP2Hand ] = useState([]);
@@ -21,6 +43,7 @@ const GameTable = (props) => {
     const [ gameOn, setGameOn ] = useState(false)
     const [ p1Score, setP1Score ] = useState(0)
     const [ p2Score, setP2Score ] = useState(0)
+    const [ betweenRounds, setBetweenRounds ] = useState(false)
 
     // function that creates arrays for p1 hand, p2 hand, and common cards.
     // Also sets remaining cards of game deck state to -10
@@ -159,6 +182,8 @@ const GameTable = (props) => {
                 setP1Score={setP1Score}
                 p2Score={p2Score}
                 setP2Score={setP2Score}
+                betweenRounds={betweenRounds}
+                setBetweenRounds={setBetweenRounds}
             />
             {/* div container used to alter behavior of middle cards/play area */}
             <div className={styles.commonCardContainer}>
@@ -198,12 +223,15 @@ const GameTable = (props) => {
                 setP1Score={setP1Score}
                 p2Score={p2Score}
                 setP2Score={setP2Score}
+                betweenRounds={betweenRounds}
+                setBetweenRounds={setBetweenRounds}
             />
             <button
                 className={styles.startbtn}
                 onClick={() => newGameDeal()}
             >Start Game
             </button>
+            <p className={css([stylesb.NewDealInvis, betweenRounds === true && stylesb.NewDealVis])}>New Deal</p>
         </div>
     )
 }
