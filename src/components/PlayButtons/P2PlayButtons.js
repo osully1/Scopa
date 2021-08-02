@@ -237,7 +237,7 @@ const P2PlayButtons = (props) => {
             newRound()
         }
 
-        // Checks if the game is over
+        // Checks if the game is over. Runs gameOver()
         if (
             (
                 props.p1Score > 20
@@ -295,7 +295,7 @@ const P2PlayButtons = (props) => {
             newRound()
         }
 
-        // Checks if the game is over
+        // Checks if the game is over. Runs gameOver()
         if (
             (
                 props.p1Score > 20
