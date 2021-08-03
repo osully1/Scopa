@@ -47,7 +47,7 @@ const GameTable = (props) => {
             width: '9em',
             alignItems: 'center',
             position: 'absolute',
-            top: '12em',
+            top: '16em',
             right: '0',
             left: '0',
             marginLeft: 'auto',
