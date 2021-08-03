@@ -9,6 +9,7 @@
     "aphrodite": "^2.4.0",
     "bootstrap": "^5.0.2",
     "fetch-retry": "^4.1.1",
+    "gh-pages": "^3.2.3",
     "react": "^17.0.2",
     "react-animations": "^1.0.0",
     "react-bootstrap": "^1.6.1",
