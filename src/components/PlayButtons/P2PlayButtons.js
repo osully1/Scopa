@@ -50,6 +50,7 @@ const P2PlayButtons = (props) => {
         const p1Data = await drawCardsP1(data.deck_id)
         const p2Data = await drawCardsP2(data.deck_id)
         const commonData = await drawCommonCards(data.deck_id)
+        props.setCommonCards([])
         props.setDeckData(data)
         props.setBetweenRounds(true)
         setTimeout(() => {
@@ -92,11 +93,11 @@ const P2PlayButtons = (props) => {
     const newSubRound = () => {
         setTimeout(() => {
             newDeal1()   
-        }, 800)
+        }, 1000)
 
         setTimeout(() => {
             newDeal2()   
-        }, 1600)
+        }, 2000)
     }
 
     // Runs when players have no more cards and deck is dry. Deals new cards and sets scores

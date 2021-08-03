@@ -6,40 +6,63 @@ import P1Side from '../PlayerSide/P1Side';
 import P2Side from '../PlayerSide/P2Side';
 import PlayArea from '../PlayArea/PlayArea';
 import ForNataliia from '../ForNataliia/ForNataliia'
+// import Rules from '../Rules/Rules'
 import styles from './GameTable.module.css';
 import { css, StyleSheet } from "aphrodite"
-import { fadeIn } from 'react-animations'
+import { fadeIn, slideInLeft } from 'react-animations'
+import { Route, Switch, Link } from 'react-router-dom';
 
 const GameTable = (props) => {
 
     const stylesb = StyleSheet.create({
-        NewDealInvis: {
-            animationName: fadeIn,
-            animationDuration: '1s',
-            position: 'absolute',
-            left: '50%',
-            top: '50%',
+        Invis: {
             display: 'none'
         },
         NewDealVis: {
             animationName: fadeIn,
             animationDuration: '1s',
+            fontSize: '3em',
             position: 'absolute',
-            left: '50%',
-            top: '50%',
+            left: '0',
+            right: '0',
+            top: '45%',
+            marginLeft: 'auto',
+            marginRight: 'auto',
             display: 'auto',
             zIndex: '2'
-        },
-        PWinsInvis: {
-            display: 'none'
         },
         PWinsVis: {
             display: 'auto',
             position: 'absolute',
-            top: '50%',
-            left: '50%',
+            top: '0',
+            left: '0',
+            marginLeft: 'auto',
+            marginRight: 'auto',
             zIndex: '2',
             size: '10em'
+        },
+        StartBtnVis: {
+            display: 'flex',
+            flexDirection: 'column',
+            width: '9em',
+            alignItems: 'center',
+            position: 'absolute',
+            top: '12em',
+            right: '0',
+            left: '0',
+            marginLeft: 'auto',
+            marginRight: 'auto'
+
+        },
+        ExitGame: {
+            animationName: slideInLeft,
+            animationDuration: '1s',
+            display: 'auto',
+            position: 'absolute',
+            left: '30px',
+            bottom: '20px',
+            // marginLeft: '50px',
+            // marginBottom: 'auto'
         }
     })
 
@@ -80,6 +103,13 @@ const GameTable = (props) => {
             ...prevState,
             remaining: 30
         }))
+    }
+
+    const exitGame = () => {
+        setGameOn(false)
+        setP1Hand([])
+        setP2Hand([])
+        setCommonCards([])
     }
 
     // Value Equals Start ////////////////
@@ -178,9 +208,11 @@ const GameTable = (props) => {
 
     return (
         <div className={styles.GameTable}>
-            <ForNataliia 
-                gameOn={gameOn}
-            />
+            <div className={styles.titleDiv}>
+                <ForNataliia 
+                    gameOn={gameOn}
+                />
+            </div>
             <P1Side
                 deckData={props.deckData}
                 setDeckData={props.setDeckData}
@@ -258,14 +290,22 @@ const GameTable = (props) => {
                 p2Wins={p2Wins}
                 setP2Wins={setP2Wins}
             />
+            <div className={css([stylesb.Invis, gameOn === false && stylesb.StartBtnVis])}>
+                <button
+                    className={styles.startbtn}
+                    onClick={() => newGameDeal()}
+                >Start Game
+                </button>
+                <Link className={styles.rulesbtn} to='/rules'>Rules/Instructions</Link>
+            </div>
             <button
-                className={styles.startbtn}
-                onClick={() => newGameDeal()}
-            >Start Game
+                className={css([stylesb.Invis, gameOn === true && stylesb.ExitGame])}
+                onClick={() => exitGame()}
+            >Exit Game
             </button>
-            <p className={css([stylesb.NewDealInvis, betweenRounds === true && stylesb.NewDealVis])}>New Deal</p>
-            <p className={css([stylesb.PWinsInvis, p1Wins === true && stylesb.PWinsVis])}>PLAYER 1 WINS!!</p>
-            <p className={css([stylesb.PWinsInvis, p2Wins === true && stylesb.PWinsVis])}>PLAYER 2 WINS!!</p>
+            <p className={css([stylesb.Invis, betweenRounds === true && stylesb.NewDealVis])}>New Round Deal</p>
+            <p className={css([stylesb.Invis, p1Wins === true && stylesb.PWinsVis])}>PLAYER 1 WINS!!</p>
+            <p className={css([stylesb.Invis, p2Wins === true && stylesb.PWinsVis])}>PLAYER 2 WINS!!</p>
         </div>
     )
 }

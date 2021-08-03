@@ -4,13 +4,19 @@ export function newGameDeck() {
 
 export function drawCardsP1(deckid) {
     try{
-        return fetch('http://deckofcardsapi.com/api/deck/' + deckid + '/draw/?count=3').then(res => res.json());
+        return fetch('http://deckofcardsapi.com/api/deck/' + deckid + '/draw/?count=3', {
+            retries: 4,
+            retryDelay: 1500
+        }).then(res => res.json());
     } catch(error) {console.log(error)}
 }
 
 export function drawCardsP2(deckid) {
     try{
-        return fetch('http://deckofcardsapi.com/api/deck/' + deckid + '/draw/?count=3').then(res => res.json());
+        return fetch('http://deckofcardsapi.com/api/deck/' + deckid + '/draw/?count=3', {
+            retries: 4,
+            retryDelay: 1500
+        }).then(res => res.json());
     } catch(error) {console.log(error)}
 }
 

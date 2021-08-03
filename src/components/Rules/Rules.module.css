@@ -1,0 +1,43 @@
+.rulesContainer {
+    height: 99vh;
+    width: 99vw;
+    background-color: #282C34;
+    display: flex;
+    text-align: justify;
+    text-align-last: left;
+    font-size: 22px;
+}
+
+.rules1 {
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+    width: 50%;
+}
+
+.rules2 {
+    margin-top: 20px;
+    margin-right: 20px;
+    width: 50%;
+}
+
+.backbtn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 30px;
+    margin-right: 30px; 
+    font-size: 1.6em;
+    background-color: #EFEFEF;
+    color: black;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.backbtn:link {
+    text-decoration: none;
+}
+
+.backbtn:hover {
+    color: black
+}

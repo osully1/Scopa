@@ -3,12 +3,6 @@
     width: 100vw;
 }
 
-.startbtn {
-    position: absolute;
-    left: 15px;
-    bottom: 15px;
-}
-
 .commonCardContainer {
     position: absolute;
     margin: 0;
@@ -22,4 +16,35 @@
     align-content: center;
     flex-wrap: wrap;
     height: 45%;
+}
+
+.titleDiv {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.startbtn {
+    margin-bottom: 10px;
+}
+
+.rulesbtn {
+    background-color: #EFEFEF;
+    color: black;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.rulesbtn:link {
+    text-decoration: none;
+}
+
+.rulesbtn:hover {
+    color: black
 }

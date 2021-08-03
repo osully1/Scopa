@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
 import { newGameDeck } from './services/card-api';
 import GameTable from './components/GameTable/GameTable';
+import Rules from './components/Rules/Rules';
 
 function App() {
 
   const [ deckData, setDeckData ] = useState({})
-  const [ scores, setScores ] = useState([])
+  const [ rulesOn, setRulesOn] = useState(false)
 
   // Sets state with deck_id
   async function newGame() {
@@ -28,8 +29,14 @@ function App() {
             <GameTable
               deckData={deckData}
               setDeckData={setDeckData}
+              rulesOn={rulesOn}
+              setRulesOn={setRulesOn}
             />
           } />
+          <Route exact path='/rules' render={(props) => (
+            <Rules rulesOn={rulesOn} />
+          )}
+          />
         </Switch>
       </header>
     </div>
