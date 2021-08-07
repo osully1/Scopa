@@ -9,7 +9,7 @@ export function drawCardsP1(deckid) {
             retryDelay: 1500,
             // mode: "no-cors"
         }).then(res => res.json());
-    } catch(error) {console.log(error)}
+    } catch(error) {console.log('woohoo')}
 }
 
 export function drawCardsP2(deckid) {
