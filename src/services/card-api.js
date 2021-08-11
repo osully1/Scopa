@@ -7,7 +7,7 @@ export function drawCardsP1(deckid) {
         return fetch('https://deckofcardsapi.com/api/deck/' + deckid + '/draw/?count=3', {
             retries: 4,
             retryDelay: 1500,
-            // mode: "no-corsf"
+            // mode: "no-cor"
         }).then(res => res.json());
     } catch(error) {console.log(error)}
 }
