@@ -8,7 +8,7 @@ export function drawCardsP1(deckid) {
             retries: 4,
             retryDelay: 1500,
             // mode: "no-cors"
-        }).then(res => res.json());
+        })().then(res => res.json());
     } catch(error) {console.log(error)}
 }
 
